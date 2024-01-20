@@ -2,7 +2,7 @@ import hashlib
 import os
 import string
 from itertools import permutations
-from first_names import fnames, fnames2
+from first_names import fnames2
 from passlib.hash import htdigest, sha512_crypt
 from passlib.hash import pbkdf2_sha256, md5_crypt
 
@@ -126,10 +126,9 @@ class PasswordCracker:
 
                     result = sha512_crypt.using(rounds=5000, salt=str(
                         salt)).hash(str(password)).split("$")[-1]
-                    result_lower = sha512_crypt.using(rounds=5000, salt=str(
-                        salt)).hash(str(password).lower()).split("$")[-1]
-                    result_upper = sha512_crypt.using(rounds=5000, salt=str(
-                        salt)).hash(str(password).upper()).split("$")[-1]
+                    result_lower = \
+                        sha512_crypt.using(rounds=5000, salt=str(salt)).hash(
+                            str(password).lower()).split("$")[-1]
 
                     if result == password_hash:
                         hash_to_password[password_hash] = password
@@ -155,23 +154,14 @@ class PasswordCracker:
                             "====================================================================")
                         return
 
-                    if result_upper == password_hash:
-                        hash_to_password[password_hash] = password
-                        visited_groups[no] = True
-                        print(
-                            "===========================================================")
-                        print(
-                            f"Group {no}: My guess for {username} password is {password.lower()}")
-                        print(
-                            "===========================================================")
-                        return
-
 
 # Example Usage
 # special_characters = "!@#$%^&*()-=_+[]{}|;:'\",.<>?/£§"
 special_characters = string.punctuation
-months = list(range(1, 13))
-days = list(range(1, 32))
+days = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+        "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+months = ["01", "02", "03", "04", "05",
+          "06", "07", "08", "09", "10", "11", "12"]
 my_password = "10@Mofi13"
 
 bytes_ = my_password.encode('utf-8')
@@ -212,5 +202,5 @@ for i in range(len(hashes)):
         print(f"With salt {salts[i]} to similar hash of: {hashes[i]}...")
         password_cracker.your_password(
             group_no, usernames[i], salts[i], hashes[i])
-# my_hash = sha512_crypt.using(rounds=5000, salt="eNgEGA1iz9ALVchi").hash("11%tijesunimi17").split("$")[-1]
+# my_hash = sha512_crypt.using(rounds=5000, salt="UkVWmimFfBcmgeuh").hash("25marvellous@09").split("$")[-1]
 # print(my_hash)
