@@ -7,3 +7,5 @@ possible as the requirements for winning.
 - The shadow.txt file has its contents gotten from the shadow file in the /etc/shadow directory in Linux.
 - The firstname.py file contains a map of each group number to its members
 - Modify any of the two above files for the password you want to crack with the password_crack.py file
+
+The hashing algorithm used for the shadow file was the SHA-512. It goes for 5000 rounds and requires the Salt.
